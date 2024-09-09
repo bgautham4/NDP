@@ -143,8 +143,8 @@ int set_mac_addrs(struct lib_socket_descriptor *d)
 		if(get_mac_address(t->remote_addr, s->remote_mac, lib.local_addr))
 			return -2;
 	#else
-		if(get_mac_address(t->local_addr, s->local_mac))
-			return -1;
+		unsigned char local_mac[6] = {0x00,0x00,0x00,0x00,0x00,0x00}; //Note this is char array, so fill 6bytes of addr
+		memcpy(s->local_mac, local_mac, (6u*sizeof(char))); 
 		if(get_mac_address(t->remote_addr, s->remote_mac))
 			return -2;
 	#endif

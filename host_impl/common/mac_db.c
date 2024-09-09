@@ -72,7 +72,7 @@ static const struct computer_mac_info cam_mac_info [] =
 };
 
 //Hardcoded MAC address of dest
-static const struct computer_mac_info hardcoded_mac_info = {1,2, {MAC6(/*Put mac addr here*/)}};
+static const struct computer_mac_info hardcoded_mac_info = {1,2, {MAC6(/*Put dst addr here*/)}};
 
 int gaina_get_mac(unsigned int computer_idx, unsigned int interface_idx, struct ndp_mac_addr *dst)
 {
