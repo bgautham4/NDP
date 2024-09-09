@@ -27,12 +27,13 @@ static char dpdk_arg2[30];
 static char dpdk_arg0[] = "/home/gautham/NDP/host_impl/core/build/core"; 
 static char dpdk_arg1[] = "--no-pci";
 static char dpdk_arg2[] = "--vdev=net_pcap0,iface=ens4";
-
+static char dpdk_arg3[] = "-c";
+static char dpdk_arg4[42];
 #ifdef NDP_BUILDING_FOR_XEN
 	static char dpdk_arg3[] = "--xen-dom0";
 	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2, dpdk_arg3 };
 #else
-	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2 };
+	static char *dpdk_argv[] = { dpdk_arg0, dpdk_arg1, dpdk_arg2, dpdk_arg3, dpdk_arg4};
 #endif
 
 /*
@@ -56,7 +57,7 @@ static void enable_strict_prio_for_tc(uint8_t port, uint8_t tc)
 int init_dpdk(void)
 {
 	static_assert(CORE_MASK_VALUE < 64, "CORE_MASK_VALUE too large");
-	sprintf(dpdk_arg2, "%d", CORE_MASK_VALUE);
+	sprintf(dpdk_arg4, "%d", CORE_MASK_VALUE);
 
 	core.dpdk_port_id = 0;
 
