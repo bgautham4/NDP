@@ -1,4 +1,5 @@
 #include "mac_db.h"
+#include "defs.h"
 #include <string.h>
 
 
@@ -70,6 +71,8 @@ static const struct computer_mac_info cam_mac_info [] =
 		{7 , 1, { MAC6(90, e2, ba, 27, fb, c8) } }  //server113
 };
 
+//Hardcoded MAC address of dest
+static const struct computer_mac_info hardcoded_mac_info = {1,2, {MAC6(/*Put mac addr here*/)}};
 
 int gaina_get_mac(unsigned int computer_idx, unsigned int interface_idx, struct ndp_mac_addr *dst)
 {
@@ -87,6 +90,7 @@ int gaina_get_mac(unsigned int computer_idx, unsigned int interface_idx, struct 
 
 int cocos_get_mac(unsigned int computer_idx, unsigned int interface_idx, struct ndp_mac_addr *dst)
 {
+	/*
 	if(computer_idx >= sizeof(cocos_mac_info) / sizeof(struct computer_mac_info))
 		return -1;
 
@@ -94,7 +98,8 @@ int cocos_get_mac(unsigned int computer_idx, unsigned int interface_idx, struct 
 		return -2;
 
 	memcpy(dst, &cocos_mac_info[computer_idx].interface_mac[interface_idx], sizeof(struct ndp_mac_addr));
-
+	*/
+	memcpy(dst, &(hardcoded_mac_info.interface_mac[0]), sizeof(struct ndp_mac_addr));
 	return 0;
 }
 

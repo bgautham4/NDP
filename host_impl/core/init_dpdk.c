@@ -17,11 +17,16 @@
 #define CORE_MASK_VALUE		(((1 << CORE_REQS_SUM) - 1) << 1)
 
 
-
+/*
 //the arguments fed to the dpdk initialization
 static char dpdk_arg0[] = "zzz";	//this should actually be the program name I guess, but ah well
 static char dpdk_arg1[] = "-c";
 static char dpdk_arg2[30];
+*/
+//Force write args for dpdk
+static char dpdk_arg0[] = "/home/gautham/NDP/host_impl/core/build/core"; 
+static char dpdk_arg1[] = "--no-pci";
+static char dpdk_arg2[] = "--vdev=net_pcap0,iface=ens4";
 
 #ifdef NDP_BUILDING_FOR_XEN
 	static char dpdk_arg3[] = "--xen-dom0";
@@ -87,8 +92,8 @@ int init_dpdk(void)
 */
 
 	unsigned int lcore_count = rte_lcore_count();
-	if(lcore_count != needed_lcores)
-		LOG_FMSG_DO(LOGLVL1, return -1, "%s-> rte_lcore_count(%u) != needed_lcores(%u)", __func__, lcore_count, needed_lcores);
+	if(lcore_count < needed_lcores)
+		LOG_FMSG_DO(LOGLVL1, return -1, "%s-> rte_lcore_count(%u) < needed_lcores(%u)", __func__, lcore_count, needed_lcores);
 
 	LOG_FMSG(LOGLVL10, "rte_lcore_count() = %u", lcore_count);
 

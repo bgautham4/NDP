@@ -26,7 +26,7 @@
 #if NDP_CURRENT_TEST_ENVIRONMENT == ENV_CAM
 	char *destination_server = "10.0.0.3";
 #elif NDP_CURRENT_TEST_ENVIRONMENT == ENV_COCOS
-	char *destination_server = "10.0.0.6";
+	char *destination_server = "192.168.122."; /*change the server IP address*/
 #elif NDP_CURRENT_TEST_ENVIRONMENT == ENV_GAINA
 	char *destination_server = "10.0.0.7";
 #else
